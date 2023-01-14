@@ -3,6 +3,7 @@ const app = express();
 const port  = 8000;
 
 //use express router(no need to give /index)
+//tell all root request go to routes/index
 app.use('/',require('./routes'));
 
 
