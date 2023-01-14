@@ -6,6 +6,7 @@ const port  = 8000;
 //tell all root request go to routes/index
 app.use('/',require('./routes'));
 
+//set up view engine
 app.set('view engine',ejs);
 app.set("views",'./views');
 
