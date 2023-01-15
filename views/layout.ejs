@@ -2,10 +2,12 @@
     <head>
         <title><%= title %></title>
         <link rel="stylesheet" href="/css/layout.css" />
-    </head>
+        <%- style %>
+    </head> 
     <body>
           <%- include('_header') %>
           <%- body %>
           <%- include('_footer') %>
+          <%- script %>
     </body>
 </html>
