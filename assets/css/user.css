@@ -1,4 +1,19 @@
-body
+form
 {
-    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field {
+    margin-bottom: 5px;
+}
+
+.input-field label {
+    display: inline-block;
+    width:90px;
+}
+
+input[type="submit"]
+{
+    width:70px;
 }
