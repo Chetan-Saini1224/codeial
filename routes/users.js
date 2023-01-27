@@ -1,4 +1,3 @@
-const { application } = require("express");
 const express = require("express");
 const passport = require("passport");
 
@@ -12,6 +11,7 @@ router.get('/signup',usersController.signup);
 router.post("/signupuser",usersController.signupUser);
 router.get("/signin",usersController.signin);
 router.get("/signout",usersController.signout);
+
 
 //use passport as middleware to authenticate
 router.post("/create-session",passport.authenticate(

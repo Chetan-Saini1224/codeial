@@ -3,8 +3,17 @@
 
 <section id="feed-posts">
  <h4>Posts</h4>
- <form action="" id="new-post-form" method="post">
-    <textarea name="content" cols="30" rows="3"></textarea>
+ <form action="posts/create" id="new-post-form" method="post">
+    <textarea placeholder="Type Here .." name="content" cols="30" rows="3"></textarea>
     <input type="Submit" value="post"> 
  </form>
+
+  <section id="post-list">
+      <% if(locals.posts_list) {%>
+         <% for(let i = 0;i<posts_list.length;i++){ %>
+           <p> <%= posts_list[i].content %> : <%= posts_list[i].user.name %>  </p>  
+         <%}%>   
+      <%}%>   
+  </section> 
+
 </section>
