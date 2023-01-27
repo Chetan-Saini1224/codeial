@@ -1,19 +1,17 @@
-form
-{
-    display: flex;
-    flex-direction: column;
+form {
+  display: flex;
+  flex-direction: column;
 }
 
 .input-field {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .input-field label {
-    display: inline-block;
-    width:90px;
+  display: inline-block;
+  width: 90px;
 }
 
-input[type="submit"]
-{
-    width:70px;
+input[type=submit] {
+  width: 70px;
 }

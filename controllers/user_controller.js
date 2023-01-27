@@ -11,6 +11,10 @@ module.exports.profile = function(req,res)
 //for creating user
 module.exports.signup = function(req,res)
 {   
+   if(req.isAuthenticated())
+   {
+      return res.redirect("profile")
+   }
    return res.render("signup",{title:"signUp"}); 
 }
 
@@ -52,17 +56,29 @@ module.exports.signupUser = function(req,res)
 //For Login
 module.exports.signin = function(req,res)
 { 
-   console.log(req.cookies)  
-   res.cookie('user_id',"234");
-   res.cookie('someOne',"says blalala");
-   return res.render("signin",{title:"signIn"}); 
+   // console.log(req.cookies)  
+   // res.cookie('user_id',"234");
+   // res.cookie('someOne',"says blalala");
+   if(req.isAuthenticated())
+   { 
+      return res.redirect("profile");
+   }
+   else return res.render("signin",{title:"signIn"}); 
 }
 
 module.exports.createSession = function(req,res)
 {   
-   return res.render("signin",{title:"signIn"}); 
+   return res.redirect("/"); 
 }
 
+module.exports.signout = function(req,res)
+{ 
+   //passport give this function to req 
+   req.logout(function(err) {
+      if (err) { return next(err); }
+      res.redirect('/');
+    });
+}
 
 
 

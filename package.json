@@ -4,8 +4,10 @@
   "description": "my all social media web application",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm-run-all --parallel sass-watch nodemon-watch",
+    "nodemon-watch" : "nodemon index.js -e *",
+    "sass-watch": "sass --no-source-map --watch assets/scss:assets/css",
+    "dev": "npm-run-all --parallel sass-watch nodemon-watch"
   },
   "keywords": [
     "social"
@@ -13,10 +15,18 @@
   "author": "chetan saini",
   "license": "ISC",
   "dependencies": {
+    "connect-mongo": "^4.6.0",
     "cookie-parser": "^1.4.6",
+    "dart-sass-middleware": "^0.1.0",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "express-ejs-layouts": "^2.5.1",
-    "mongoose": "^6.8.3"
+    "express-session": "^1.17.3",
+    "mongoose": "^6.8.3",
+    "node-sass": "^8.0.0",
+    "npm-run-all": "^4.1.5",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "sass": "^1.57.1"
   }
 }
