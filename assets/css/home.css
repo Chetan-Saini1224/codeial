@@ -1,3 +1,9 @@
 body {
   background-color: rgb(255, 91, 159);
 }
+
+#post-list {
+  height: 39%;
+  overflow: auto;
+  background-color: rgb(126, 126, 126);
+}

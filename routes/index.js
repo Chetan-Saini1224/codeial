@@ -8,6 +8,6 @@ router.get('/',homeController.home);
 //like for :- /users/profile
 router.use('/users',require('./users')); 
 router.use('/posts',require('./post'));
-
+router.use('/comment',require('./comment'));
 
 module.exports = router;
