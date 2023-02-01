@@ -1,0 +1,5 @@
+User.findOneAndUpdate will find a user and update the record.
+Which option, 
+if passed t will create a new User object if User.
+findOneAndUpdate is unable to find a user
+sol:- {Upsert:true}

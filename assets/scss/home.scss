@@ -1,13 +1,75 @@
-$color_red: rgb(255, 91, 159);
-
+$color_bg: rgba(206, 91, 255, 0.995);
+$color_hover: rgb(100, 100, 255);
 body
 {
-    background-color: $color_red;
+    background-color: $color_bg;
 }
 
 #post-list
 {
-    height:39%;
+    height: 100%;
     overflow: auto;
     background-color: rgb(126, 126, 126);
+}
+
+.show-hide
+{
+    display: none;
+}
+
+.comment
+{
+    background-color: aquamarine;
+}
+
+#home-main
+{
+    display: flex;
+    justify-content: space-around;
+}
+#user-friends
+{
+    display: flex;
+    flex-direction: column;
+    a
+    {
+        text-decoration: none;
+        text-transform: capitalize;
+        color: aliceblue;
+        margin-bottom: 0.3rem;
+        &:hover
+        {
+            color: $color_hover;
+        }
+    } 
+}
+
+#feed-posts
+{
+    width:60%;
+}
+
+#new-post-form
+{
+    display: flex;
+    flex-direction: column;
+
+    input[type='submit']
+    {
+        width:15%;
+        height:7%;
+        margin-top: 0.3rem;
+    }
+}
+input[type='submit'], input[type="button"]
+{
+    border-radius: 10px;
+    border:2px solid aliceblue;
+    color:aliceblue;
+    background-color: gray; 
+    
+    &:hover
+    {
+        background-color: $color_hover;
+    }
 }

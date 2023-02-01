@@ -1,5 +1,5 @@
 const postSchema = require("../models/post");
-
+const user = require("../models/users");
 module.exports.home = function(req,res)
 {
    //poulate user of each post
@@ -18,8 +18,13 @@ module.exports.home = function(req,res)
           console.log("error in getting posts list");
           return res.redirect("back");
         }
-        return res.render("home",{title:"home",posts_list});   
-    })
+        user.find({},function(err,users){
+          return res.render("home",{
+            title:"home",
+            posts_list,
+            all_users:users});   
+        }) 
+        })      
 }
 
 

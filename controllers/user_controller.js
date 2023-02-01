@@ -3,9 +3,31 @@ const userSchema = require("../models/users")
 
 module.exports.profile = function(req,res)
 {
-   return res.render('users',{title:"users profile"});    
+   userSchema.findById(req.params.id,function(err,user){
+      return res.render('users',{
+         title:"users profile",
+         profile_user:user
+      }); 
+   })
+   
 }
 
+
+
+
+
+module.exports.update = function(req,res)
+{
+     if(req.user.id == req.params.id)
+     {
+        userSchema.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+             return res.redirect('back');  
+        })  
+     }
+     else{
+      return res.status((401).send('Unauthorized'));
+     }  
+}
 
 
 //for creating user
@@ -79,7 +101,6 @@ module.exports.signout = function(req,res)
       res.redirect('/');
     });
 }
-
 
 
 
