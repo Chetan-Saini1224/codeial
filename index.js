@@ -13,6 +13,9 @@ const passportLocal = require("./config/passport-local-strategy");
 //mongo store is used to store the seeion cookie in the db
 //using for loggin if even if restart server
 const MongoStore = require("connect-mongo");
+const flash = require('connect-flash');
+const customMware = require('./config/middleware');
+
 
 app.use(express.urlencoded({ extended: true })); //read through post request
 app.use(cookieParser());
@@ -46,7 +49,13 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
 app.use(passport.setAuthenticatedUser);
+
+
+app.use(flash());
+app.use(customMware.setFlash);
 
 //use express router(no need to give /index)
 //tell all root request go to routes/index

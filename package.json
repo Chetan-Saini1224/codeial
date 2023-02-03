@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm-run-all --parallel sass-watch nodemon-watch",
-    "nodemon-watch" : "nodemon index.js -e *",
+    "nodemon-watch": "nodemon index.js -e *",
     "sass-watch": "sass --no-source-map --watch assets/scss:assets/css",
     "dev": "npm-run-all --parallel sass-watch nodemon-watch"
   },
@@ -15,6 +15,7 @@
   "author": "chetan saini",
   "license": "ISC",
   "dependencies": {
+    "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",
     "cookie-parser": "^1.4.6",
     "dart-sass-middleware": "^0.1.0",

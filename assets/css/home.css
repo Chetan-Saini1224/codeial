@@ -3,8 +3,8 @@ body {
 }
 
 #post-list {
-  height: 100%;
   overflow: auto;
+  max-height: 50%;
   background-color: rgb(126, 126, 126);
 }
 
@@ -19,6 +19,7 @@ body {
 #home-main {
   display: flex;
   justify-content: space-around;
+  height: 70%;
 }
 
 #user-friends {

@@ -1,31 +1,40 @@
 const postSchema = require("../models/post");
 const Comment = require("../models/comment");
 
-module.exports.create = function (req, res) {
+module.exports.create =async function (req, res) {
+  try{
   let obj = {};
   obj.content = req.body.content;
   obj.user = req.user._id;
-  postSchema.create(obj, (err, post) => {
-    if (err) {
-      console.log("Error while creating post");
-      return res.redirect("back");
-    }
-    console.log("post create successfully" + post);
-    return res.redirect("back");
-  });
+  await postSchema.create(obj);
+  req.flash("success","Post Published");
+  return res.redirect("back");
+  }
+  catch(err)
+  {
+    req.flash('erorr','Error While Posting');
+    console.log("Error : ",err);
+    res.redirect("back");
+  }
 };
 
-module.exports.destroy = function (req, res) {
-  postSchema.findById(req.params.id, function (err, post) {
+module.exports.destroy =async function (req, res) 
+{
+  try{
+    let post = await postSchema.findById(req.params.id);
     //.id means coverting object id into string express provide.
     if (post.user == req.user.id) {
-      post.remove();
-
-      Comment.deleteMany({ post: req.params.id }, function (err) {
-        return res.redirect("back");
-      });
-    } else {
+      await post.remove();
+      await Comment.deleteMany({ post: req.params.id });
+      req.flash('success',"Post Deleted Successfully")
       return res.redirect("back");
-    }
-  });
-};
+    } 
+  }
+  catch(err)
+  {
+    req.flash('erorr','Error While Deleting Post');
+    console.log("Error : ",err);
+    res.redirect("back");
+  }
+    
+}

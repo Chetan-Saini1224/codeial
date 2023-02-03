@@ -58,13 +58,14 @@ module.exports.signupUser = function(req,res)
                console.log(err);
                return res.redirect("signup");
             } 
-            console.log(newUser);
+            req.flash('success','Login to continue');
             return res.redirect("signin");
          })
        }
 
        else
        {
+         req.flash('error','User Already Exist');
          console.log("user already exist");
          return res.redirect("signup");
        }
@@ -90,6 +91,8 @@ module.exports.signin = function(req,res)
 
 module.exports.createSession = function(req,res)
 {   
+   req.flash('success','Logged in Successfully')
+   
    return res.redirect("/"); 
 }
 
@@ -98,6 +101,9 @@ module.exports.signout = function(req,res)
    //passport give this function to req 
    req.logout(function(err) {
       if (err) { return next(err); }
+      req.flash('success','You have logged out!');
+
+      //we can also send context like logout successfully.but eeeee...
       res.redirect('/');
     });
 }
