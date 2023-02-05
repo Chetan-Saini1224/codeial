@@ -1,33 +1,35 @@
-<p>
-  <% if(locals.user && locals.user.id == post.user.id) { %>
-  <samll><a href="/posts/destroy/<%= post.id %>">X</a></samll>
-  <% } %> <%= post.content %> : <%= post.user.name %>
-</p>
-<div class="post-comments">
-  <%if(locals.user) {%>
-  <form action="/comment/create" method="post">
+<div id="post-<%= post._id%>">
+  <p>
+    <% if(locals.user && locals.user.id == post.user.id) { %>
+    <samll>
+      <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">X</a>
+    </samll>
+    <% } %> <%= post.content %> : <%= post.user.name %>
+  </p>
+  <div class="post-comments">
+    <%if(locals.user) {%>
+    <form class="create-comment-form" action="/comment/create" method="post">
+      <input
+        type="text"
+        name="content"
+        placeholder="Type Here To Add Comment.."
+        required
+      />
+      <input type="hidden" name="post" value="<%= post._id%>" />
+      <input type="submit" value="Add Comment" />
+    </form>
+    <%}%>
     <input
-      type="text"
-      name="content"
-      placeholder="Type Here To Add Comment.."
-      required
+      type="button"
+      data-id="<%= post._id %>"
+      onclick="Comment_List(this)"
+      value="Comments"
     />
-    <input type="hidden" name="post" value="<%= post._id%>" />
-    <input type="submit" value="Add Comment" />
-  </form>
-  <%}%>
-  <input
-    type="button"
-    data-id="<%= post._id %>"
-    onclick="Comment_List(this)"
-    value="Comments"
-  />
-  <div class="post-comments-list">
-    <ul class="comment show-hide" id="post-comments-<%= post._id %>">
-        <% for(let comment of post.comments ) {%>
-            <%- include('_comment',{comment}) -%> 
-        <%}%>
-    </ul>
+    <div class="post-comments-list">
+      <ul class="comment show-hide" id="post-comments-<%= post._id %>">
+        <% for(let comment of post.comments ) {%> <%-
+        include('_comment',{comment}) -%> <%}%>
+      </ul>
+    </div>
   </div>
 </div>
-

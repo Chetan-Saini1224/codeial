@@ -21,6 +21,19 @@ module.exports.create = async function (req, res) {
     //data in the memory we make the changes and the save()
     //will save data in db
     await post.save();
+    
+    await comment.populate('user');          
+    
+    if(req.xhr)
+    {
+      return res.status(200).json({
+        data:{
+          comment
+        },
+        message:"Comment Added"
+     });
+    }
+
     req.flash('success','Comment Published');
     res.redirect("/");
   }
@@ -48,6 +61,17 @@ module.exports.destroy = async function (req, res)
     await Post.findByIdAndUpdate(
       post_id,
     { $pull: { comments: req.params.id } }); //it will pull out this id from arr
+
+    if(req.xhr)
+    {
+      return res.status(200).json({
+        data:{
+          comment_id : req.params.id 
+        },
+        message:"Comment Removed"
+     });
+    }
+
     req.flash('success','Comment Deleted Successfully');     
     return res.redirect("back"); 
   }
