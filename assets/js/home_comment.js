@@ -1,9 +1,6 @@
-
 {
-let createComment = () => {
-      
-    console.log($(".create-comment-form"));
-
+let createComment = () => 
+{      
     $(".create-comment-form").each((i,element) => {   
          $(element).submit((e) =>{
             e.preventDefault();//prevent from deafult form action submit.
@@ -11,7 +8,8 @@ let createComment = () => {
                 type: 'post',
                 url: '/comment/create',
                 data: $(e.target).serialize(), //data -> json
-                success: (data) =>{
+                success: (data) =>
+                {
                     let {comment} = data.data;
                     let card = newDomComment(comment);
                     $(`#post-comments-${comment.post}`).prepend(card);
@@ -49,15 +47,14 @@ let createComment = () => {
                 $(`#comment-${data.data.comment_id}`).remove();
                 flashMessages({success:data.message});
            },
-           error:function(err){
+           error:function(err)
+           {
                 flashMessages({error:"Error..!"});
                 console.log(err);
            }
       })
- 
     })
-
-   }
+}
 
     createComment();
 }

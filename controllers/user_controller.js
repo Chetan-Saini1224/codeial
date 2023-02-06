@@ -1,5 +1,6 @@
 const userSchema = require("../models/users")
-
+const fs = require("fs");
+const path = require("path");
 
 module.exports.profile = function(req,res)
 {
@@ -13,20 +14,44 @@ module.exports.profile = function(req,res)
 }
 
 
-
-
-
-module.exports.update = function(req,res)
+module.exports.update = async function(req,res)
 {
-     if(req.user.id == req.params.id)
-     {
-        userSchema.findByIdAndUpdate(req.params.id,req.body,function(err,user){
-             return res.redirect('back');  
-        })  
-     }
-     else{
+   if(req.user.id == req.params.id)
+   {
+         try
+         {
+            let user = await userSchema.findById(req.params.id);
+            userSchema.uploadedAvatar(req,res,function(err){
+               if(err)
+               {
+                  console.log("Multerr Error :" ,err);
+                  return res.redirect("back");
+               }
+               console.log(req.file); //multer provide this req.file
+               user.name = req.body.name;
+               user.email = req.body.email;                
+               if(req.file)
+               {
+                  //this is saving the path of uploaded file into avatar field
+                  if(user.avatar && fs.existsSync(path.join(__dirname,'..',user.avatar))) 
+                  {
+                     //to delete file
+                     fs.unlinkSync(path.join(__dirname,'..',user.avatar));
+                  }
+                  user.avatar = userSchema.avatarPath + req.file.filename;
+               }
+               user.save();
+               return res.redirect("back");
+            })
+         }
+         catch(err){
+            req.flash('error',err);
+            return res.redirect('back');
+         }
+   }
+   else{
       return res.status((401).send('Unauthorized'));
-     }  
+   }  
 }
 
 
@@ -107,6 +132,16 @@ module.exports.signout = function(req,res)
       res.redirect('/');
     });
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

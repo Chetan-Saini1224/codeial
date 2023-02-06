@@ -1,5 +1,9 @@
 User.findOneAndUpdate will find a user and update the record.
-Which option, 
+Which option,
+ 
 if passed t will create a new User object if User.
 findOneAndUpdate is unable to find a user
 sol:- {Upsert:true}
+
+Date.now() method returns the number of milliseconds elapsed since January 1, 1970 00:00:00 UTC.
+
