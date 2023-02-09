@@ -34,7 +34,6 @@ passport.use(new LocalStrategy({
 //Function deserializeUser is used to retrieve user data from session.
 
 
-
 //If authentication succeeds, a session will be established and maintained via a cookie set in the user’s browser. 
 //However, if a user logs in and refreshes the page, 
 //the user data won’t persist across HTTP requests. 

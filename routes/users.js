@@ -13,6 +13,11 @@ router.get("/signin",usersController.signin);
 router.get("/signout",usersController.signout);
 router.post('/update/:id',passport.checkAuthentication,usersController.update);
 
+//callback url
+router.get("/auth/google/callback",passport.authenticate('google',{failureRedirect:"/users/signin"}),usersController.createSession);
+
+router.get('/auth/google',passport.authenticate('google',{scope:['profile','email']}));
+
 //use passport as middleware to authenticate
 router.post("/create-session",passport.authenticate(
     'local',
