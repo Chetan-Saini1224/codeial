@@ -9,7 +9,7 @@ passport.use(new googleStrategy({
     clientSecret: "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",
     callbackURL: "http://localhost:8000/users/auth/google/callback"
     }, 
-    function(accessToken,refreshToken,profile,done){
+    function(accessToken,refreshToken,profile,done) {
         //find user
         User.findOne({email: profile.emails[0].value}).exec(function(err,user){
              if(err)
@@ -19,7 +19,7 @@ passport.use(new googleStrategy({
              }
              //accesstoken: 
              //store this access token to get the various info about user
-             //(can use api from google)
+             //(can use api from google to get data with token)
              //refresh token: 
              //undefined print (unless u ask for it it wont be coming up)
              
