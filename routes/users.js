@@ -24,6 +24,11 @@ router.post("/create-session",passport.authenticate(
     {failureRedirect: '/users/signin'},
  ), usersController.createSession);
 
+router.get("/forgetpassword",usersController.forgetPassword);
+router.post("/forgetpassword",usersController.forget_password);
+
+router.get("/resetpassword/:token",usersController.resetPasswordEmail);
+router.post("/resetpassword",usersController.reset_Password_Email);
 
 //https://stackoverflow.com/questions/27637609/understanding-passport-serialize-deserialize
 module.exports = router;

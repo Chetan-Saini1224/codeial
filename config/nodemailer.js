@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 const ejs = require("ejs");
-const pasth = require("path");
+const path = require("path");
 
 //error
 //https://stackoverflow.com/questions/59188483/error-invalid-login-535-5-7-8-username-and-password-not-accepted
@@ -23,14 +23,14 @@ const transporter = nodemailer.createTransport({
 //html email template
 let renderTemplate = (data,relativePath) => {
     let mailHtml;
-    console.log(__dirname);
+    //console.log(__dirname);
     ejs.renderFile(
         path.join(__dirname,"../views/mailers",relativePath),
         data,
         function(err,template){
             if(err)
             {
-                console.log("error in rendering mailer template");
+                console.log("error in rendering mailer template",err);
                 return;
             }
 

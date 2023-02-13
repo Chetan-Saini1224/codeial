@@ -1,6 +1,9 @@
 const userSchema = require("../models/users")
+const resetPasswordToken = require("../models/reset_password_token")
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
+const resetPasswordMailer = require("../mailers/reset_password");
 
 module.exports.profile = function(req,res)
 {
@@ -133,15 +136,84 @@ module.exports.signout = function(req,res)
     });
 }
 
+module.exports.forgetPassword = function(req,res)
+{ 
+   if(req.isAuthenticated())
+   { 
+      return res.redirect("profile");
+   }
+   
+   return res.render("forget_password",{title:"Forget Password"});  
+}
 
 
+module.exports.forget_password = async function(req,res)
+{ 
+   if(req.isAuthenticated())
+   { 
+      return res.redirect("profile");
+   }
+   
+   let user =  await userSchema.findOne({email:req.body.email});
+
+   //not right way .. multiple page rendered
+   // if(user) return res.render("",{confirmation:"Email has been sent to reset your password",title:"Forget Password"}); 
+   // return res.render("forget_password",{confirmation:"No Account Found with this email",title:"Forget Password"});
+
+   if(user)
+   {
+      req.flash('success','Email has been sent to reset your password'); 
+
+      let resetToken = await resetPasswordToken.create({user:user.id,
+      isvalid:true,
+      accesstoken: crypto.randomBytes(20).toString('hex')});
+      
+      await resetToken.populate('user','email');
+      
+      resetPasswordMailer.resetPassword(resetToken);
+   }
+   else req.flash('error','No Account Found with this email');
+
+   return res.redirect("back");
+}
 
 
+module.exports.resetPasswordEmail =async function(req,res)
+{ 
+   try{
+      const token = await  resetPasswordToken.findOne({accesstoken:req.params.token})
+      return res.render("create_password",{title:"Create Password",token});  
+   }
+   catch(err){
+      console.log("error sending new password page",err);
+      return res.redirect("back");
+   }
+}
 
-
-
-
-
-
+module.exports.reset_Password_Email =async function(req,res)
+{ 
+   try{
+   let token = await resetPasswordToken.findById(req.body.tokenId);
+   if(!token.isvalid){
+      req.flash('error','Token Expired create new request to change password');
+      return res.redirect("back"); 
+   }    
+   console.log(req.body);
+   if(req.body.password !=  req.body.confirmPassword)
+   {
+      req.flash('error','Both field must contain same value');  
+   }
+   else if(req.body.password ==  req.body.confirmPassword){
+      await userSchema.findByIdAndUpdate(req.body.uid,{password:req.body.password});
+      await resetPasswordToken.findByIdAndUpdate(req.body.tokenId,{isvalid:false}); 
+      req.flash('success','Password Updated Successfully'); 
+   }
+   return res.redirect("back"); 
+   }
+   catch(err){
+      console.log("error in reseting new password",err);
+      return res.redirect("back");
+   } 
+}
 
 
