@@ -1,6 +1,7 @@
-<p>
+<p id="comment-<%comment._id%>" >
 <% if(locals.user && locals.user.id == comment.user.id) { %>
-<small><a href="/comment/destroy/<%= comment.id %>">X</a></small>
+<small ><a class="delete-comment" href="/comment/destroy/<%= comment.id %>">X</a></small>
 <% } %>
 <small><%= comment.user.name%></small> <%= comment.content %>
+<small><a class="like-comment" href="likes/toogle?type=Comment&id=<%=comment._id%>"><span class="comment-like-count"><%= comment.likes.length %></span> Likes</a></small>
 </p>

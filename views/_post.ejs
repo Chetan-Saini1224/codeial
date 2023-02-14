@@ -5,6 +5,7 @@
       <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">X</a>
     </samll>
     <% } %> <%= post.content %> : <%= post.user.name %>
+    <small><a class="like-post" href="likes/toogle?type=Post&id=<%=post._id%>"><span class="post-like-count"><%= post.likes.length %></span> Likes</a></small>
   </p>
   <div class="post-comments">
     <%if(locals.user) {%>

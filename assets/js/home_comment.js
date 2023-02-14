@@ -35,7 +35,7 @@ let createComment = () =>
       </p>`);
    }
     
-   let deleteComment = (deleteLink) =>{
+let deleteComment = (deleteLink) =>{
    
     $(deleteLink).click(function(e) {
       e.preventDefault(); //we dont want the natural behaviour like go to href link
@@ -55,6 +55,39 @@ let createComment = () =>
       })
     })
 }
+
+let likeComment = (likeLink) =>{
+   
+     $(likeLink).click(function(e) {
+       e.preventDefault(); //we dont want the natural behaviour like go to href link
+       
+       $.ajax({
+            type: 'get',
+            url: $(likeLink).prop('href'),
+            success: function(data){
+               $('.comment-like-count',likeLink).each(function(i, obj) {
+                    if(data.deleted) obj.innerText = parseInt(obj.innerText) - 1;
+                    else obj.innerText = parseInt(obj.innerText) + 1;
+                });             
+            },
+            error:function(err)
+            {
+                 flashMessages({error:"Error..!"});
+                 console.log(err);
+            }
+       })
+     })
+}
+
+
+$(".delete-comment").each(function(i, obj) {
+     deleteComment(obj);
+ });
+
+ $(".like-comment").each(function(i, obj) {
+     likeComment(obj);
+ });
+
 
     createComment();
 }
