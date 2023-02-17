@@ -22,18 +22,27 @@ body {
   height: 70%;
 }
 
-#user-friends {
+#users-friends {
   display: flex;
   flex-direction: column;
 }
-#user-friends a {
+#users-friends #friends {
+  height: 40%;
+  overflow: auto;
+}
+#users-friends #users {
+  overflow: auto;
+}
+#users-friends a {
+  display: block;
   text-decoration: none;
   text-transform: capitalize;
   color: aliceblue;
+  text-align: left;
   margin-bottom: 0.3rem;
 }
-#user-friends a:hover {
-  color: rgb(100, 100, 255);
+#users-friends a:hover {
+  color: rgb(221, 255, 100);
 }
 
 #feed-posts {
@@ -57,5 +66,5 @@ input[type=submit], input[type=button] {
   background-color: gray;
 }
 input[type=submit]:hover, input[type=button]:hover {
-  background-color: rgb(100, 100, 255);
+  background-color: rgb(221, 255, 100);
 }

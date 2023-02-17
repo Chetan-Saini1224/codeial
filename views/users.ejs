@@ -1,6 +1,6 @@
+<script src="/js/profile.js"></script>
 <h1>codeial <%= title %></h1>
 <img src="<%= user.avatar %>" alt="profilr_avatar" width="100">
-
 
 <% if(user.id == profile_user.id) {%>
     <form action="/users/update/<%= user.id %>" enctype="multipart/form-data"  method="post">
@@ -13,3 +13,12 @@
     <p><%= profile_user.name%></p>
     <p><%= profile_user.email%></p>
 <%}%>
+
+<% if(user.id != profile_user.id) { %>
+
+<% if(friend) { %>   
+<input type="button" user-id="<%= profile_user.id %>" value="Unfriend" onclick="addFriend(this)">
+<% } else {%>
+<input type="button" user-id="<%= profile_user.id %>" value="Add Friend" onclick="addFriend(this)">
+<% } %>
+<% } %>

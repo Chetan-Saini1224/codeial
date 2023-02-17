@@ -2,7 +2,7 @@
     <h5>CODEIAL</h5>
     <div>
     <% if(locals.user) { %>
-        <a href="users/profile"><%= user.name %></a>
+        <a href="users/profile/<%=locals.user._id %>"><%= user.name %></a>
         <a href="/users/signout">Sign Out</a>
     <% } else { %>
        <a href="/users/signin">Sign In</a>

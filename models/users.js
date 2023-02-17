@@ -19,7 +19,14 @@ const userSchema = new mongoose.Schema({
     },
     avatar:{
         type: String,
-    }
+    },
+    //just to optimize query
+    friendship:[
+      {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:'Friendship'
+      }
+    ]
 },{
     timestamps: true 
 });

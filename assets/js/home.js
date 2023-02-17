@@ -120,6 +120,11 @@ let likePost = (likeLink) =>{
 
 
 
+
+
+
+
+
 $(".like-post").each(function(i, obj) {
   likePost(obj);
 });

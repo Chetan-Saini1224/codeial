@@ -1,19 +1,21 @@
 const userSchema = require("../models/users")
 const resetPasswordToken = require("../models/reset_password_token")
+const Friendship = require("../models/friendship")
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 const resetPasswordMailer = require("../mailers/reset_password");
 
-module.exports.profile = function(req,res)
+module.exports.profile = async function(req,res)
 {
-   userSchema.findById(req.params.id,function(err,user){
-      return res.render('users',{
-         title:"users profile",
-         profile_user:user
-      }); 
-   })
-   
+   let friend = await Friendship.findOne({from_user:req.user.id,to_user:req.params.id});
+   let user = await userSchema.findById(req.params.id);
+   if(friend) friend = true;
+   return res.render('users',{
+      title:"users profile",
+      profile_user:user,
+      friend
+   }); 
 }
 
 

@@ -15,6 +15,7 @@ let createComment = () =>
                     $(`#post-comments-${comment.post}`).prepend(card);
                     flashMessages({success:data.message});
                     deleteComment($('.delete-comment-a',card));
+                    likeComment($('.like-comment',card));
                 },
                 error: (err) => {
                      console.log(err.responseText);
@@ -32,6 +33,7 @@ let createComment = () =>
       </small>
       <small>${comment.user.name}</small> 
       ${comment.content} 
+      <small><a class="like-comment" href="likes/toogle?type=Comment&id=${comment._id}"><span class="comment-like-count">${ comment.likes.length }</span> Likes</a></small>
       </p>`);
    }
     

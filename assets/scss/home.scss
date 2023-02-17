@@ -1,5 +1,5 @@
 $color_bg: rgba(206, 91, 255, 0.995);
-$color_hover: rgb(100, 100, 255);
+$color_hover: rgb(221, 255, 100);
 body
 {
     background-color: $color_bg;
@@ -29,15 +29,27 @@ body
     height: 70%;
 }
 
-#user-friends
+#users-friends
 {
     display: flex;
     flex-direction: column;
+    
+    #friends{
+        height: 40%;
+        overflow: auto;
+    }
+
+    #users{
+        overflow: auto;
+    }
+
     a
     {
+        display:block;
         text-decoration: none;
         text-transform: capitalize;
         color: aliceblue;
+        text-align: left;
         margin-bottom: 0.3rem;
         &:hover
         {

@@ -15,11 +15,17 @@ try{
    });
     
    let users = await user.find({});
-
+   let friends = await user.findById(req.user.id).populate({
+    path:'friendship',
+    populate:{
+      path:'to_user'        //nexting to populate the user of comments
+    }
+    });
    return res.render("home",{
      title:"home",
      posts_list,
-     all_users:users
+     all_users:users,
+     friends: friends.friendship
    });
 }
   catch(err)

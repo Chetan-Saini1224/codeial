@@ -27,8 +27,17 @@
   </section>
 </section>
 
-<section id="user-friends">
-  <h4>Friends</h4>
+<div id="users-friends">
+
+<section id="friends">
+  <h4>Friends </h4>
+  <% for(let u of friends) {%>
+    <a href="/users/profile/<%= u.to_user._id %>"><%= u.to_user.name %></a>
+ <%}%>
+</section>
+
+<section id="users">
+  <h4>Users</h4>
   <% for(let u of all_users) {%>
      <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
   <%}%>
