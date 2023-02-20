@@ -29,12 +29,15 @@
 
 <div id="users-friends">
 
+<%  if(locals.friends) { %>
 <section id="friends">
   <h4>Friends </h4>
   <% for(let u of friends) {%>
     <a href="/users/profile/<%= u.to_user._id %>"><%= u.to_user.name %></a>
  <%}%>
 </section>
+<% } %>
+
 
 <section id="users">
   <h4>Users</h4>
@@ -43,3 +46,16 @@
   <%}%>
 </section>
 </div>
+
+<%- include('_chatBox') -%>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.js" integrity="sha512-rwu37NnL8piEGiFhe2c5j4GahN+gFsIn9k/0hkRY44iz0pc81tBNaUN56qF8X4fy+5pgAAgYi2C9FXdetne5sQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/chat_engine.js"></script>
+
+<% if(locals.user) {%>
+<script>
+    new chatEngine('chatbox','<%= locals.user.email %>');
+</script>
+<%}%>
