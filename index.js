@@ -1,9 +1,19 @@
 const express = require("express");
+const env = require("./config/environment");
+
+//to create log for error in production
+const looger = require("morgan")
+
+
+
 const cookieParser = require("cookie-parser");
 const app = express();
 const port = 8000;
 const expressLayouts = require("express-ejs-layouts");
 const db = require("./config/mongoose");
+
+//to use the menifest file to access assets(.min) 
+require("./config/view_helper")(app);
 
 //used for session cookie and authentication
 const session = require("express-session");
@@ -11,6 +21,8 @@ const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
 const passportJWT = require("./config/passport-jwt-strategy");
 const passportGoogle = require("./config/passport-google-oauth2-strategy");
+
+
 
 //mongo store is used to store the seeion cookie in the db
 //using for loggin if even if restart server
@@ -27,7 +39,12 @@ chatServer.listen(5000);
 
 app.use(express.urlencoded({ extended: true })); //read through post request
 app.use(cookieParser());
-app.use(express.static("./assets"));
+app.use(express.static(env.asset_path));
+
+
+app.use(looger(env.morgan.mode,env.morgan.options))
+
+
 //make the upload path availabel to browser
 app.use('/uploads',express.static(__dirname + '/uploads'));
 
@@ -45,7 +62,7 @@ app.set("views", "./views");
 app.use(
   session({
     name: "codeial", //todo the secret befor deployment in production mode.
-    secret: "blahsomething", //key to encrypt
+    secret: env.session_cookie_key, //key to encrypt
     saveUninitialized: false,
     resave: false,
     cookie: {

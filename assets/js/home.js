@@ -40,8 +40,7 @@ let newPostDom = function(post){
          <a class="delete-post-button" href="/posts/destroy/${ post._id }">X</a>
        </samll>
        ${  post.content } : ${ post.user.name }
-       <small><a href=""> ${post.likes.length}Likes</a></small>
-       <small><a class="like-post" href="likes/toogle?type=Post&id=${post._id}"><span class="post-like-count"><%= post.likes.length %></span> Likes</a></small>
+       <small><a class="like-post" href="likes/toogle?type=Post&id=${post._id}"><span class="post-like-count">${post.likes.length}</span> Likes</a></small>
      </p>
      <div class="post-comments">
 
@@ -52,7 +51,7 @@ let newPostDom = function(post){
            placeholder="Type Here To Add Comment.."
            required
          />
-         <input type="hidden" name="post" value="${  post._id}" />
+         <input type="hidden" name="post" value="${post._id}" />
          <input type="submit" value="Add Comment" />
        </form>
 
@@ -89,8 +88,7 @@ let deletePost = (deleteLink) =>{
                flashMessages({error:"Error..!"});
                console.log(err);
           }
-     })
-
+     }) 
    })
 }
 

@@ -1,23 +1,14 @@
 const nodemailer = require("nodemailer");
 const ejs = require("ejs");
 const path = require("path");
+const env = require("./environment")
 
 //error
 //https://stackoverflow.com/questions/59188483/error-invalid-login-535-5-7-8-username-and-password-not-accepted
 
 
 //not good practice to put all in code
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    //google create it for developer to interact with mailing server
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure:false, //like not using two factor auth
-    auth:{
-        user: 'cs75198404',
-        pass: 'eamysdppgibdeppy'
-    }
-})
+const transporter = nodemailer.createTransport(env.smtp);
 
 
 //html email template
