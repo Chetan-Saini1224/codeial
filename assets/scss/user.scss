@@ -1,3 +1,56 @@
+$color_bg : rgb(220, 106, 255);
+
+#main-body {
+   background-color: white;
+}
+
+.signIn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    flex-direction: column;
+}
+
+
+.signInActions{
+   display: flex;
+   width: 26vw;
+   height: 10vh;
+   justify-content: space-around; 
+}
+
+
+a#googleSignIn {
+    text-decoration: none;
+    display: flex;
+    border-radius: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    justify-content: space-between;
+    padding: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: 40%;
+    height: 48%;
+}
+
+a#googleSignIn img{
+    width: 12%;
+    border-radius: 6rem;
+}
+
+a#googleSignIn {
+  font-size: 75%;
+  color: black;
+  transition: background-color 0.3s ease-in-out;
+}
+
+a#googleSignIn:hover{
+   background-color: rgb(113, 113, 255);
+   color: white;
+} 
+
+
+
 form
 {
     display: flex;
@@ -8,12 +61,56 @@ form
     margin-bottom: 5px;
 }
 
+.input-field input{
+    outline: none;
+    border-width: 0;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    border-radius: 0.2rem;
+    padding: 0.3rem;
+}
+
+
 .input-field label {
     display: inline-block;
     width:90px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 input[type="submit"]
 {
     width:70px;
+    border: 2px solid $color_bg;
+    background-color: $color_bg;
+    color: white;
+    border-radius: 0.2rem;
+    font-weight: 700;
+    transition: background-color 0.3s ease-in-out;
+}
+
+input[type="submit"]:hover{
+    color: $color_bg;
+    background-color: white;
+}
+
+.sigIn-mainContainer{
+    display: flex;
+    justify-content: space-around;
+}
+
+.left-signIn{
+    width: 25%;
+    position: relative;
+    display: inline-block;
+    margin-top: 3%;
+    border-radius: 0.2rem;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgb(205, 40, 255) 100%);
+}
+
+.left-signIn p {
+    position: absolute;    
+    top: 30%;
+    font-weight: 600;
+    color: aliceblue;
+    font-style: italic;
 }

@@ -9,5 +9,6 @@ module.exports = queue;
 //one queue is of similar job ex:- noti,email..
 
 
+
 //config kue -> create worker(which is going to send mail 
 // instead of controller) -> put into queue in controller action

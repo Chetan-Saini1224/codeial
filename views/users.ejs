@@ -1,17 +1,27 @@
-<script src="<%= assetPath(`js/profile.js`) %>"></script>
-<h1>codeial <%= title %></h1>
-<img src="<%= user.avatar %>" alt="profilr_avatar" width="100">
+<!-- <script src="<%= assetPath(`js/profile.js`) %>"></script> -->
+<script src="/js/profile.js"></script>
+<link rel="stylesheet" href="/css/profile.css">
+<link rel="stylesheet" href="/css/home.css" />
+<script src="/js/home.js"></script>
+<script src="/js/home_comment.js"></script>
+<section class="profile">
+
+<div class="profile_info">
 
 <% if(user.id == profile_user.id) {%>
+    <img src="<%= user.avatar %>" alt="profilr_avatar" width="100">
     <form action="/users/update/<%= user.id %>" enctype="multipart/form-data"  method="post">
+        <h3>Update Personal Info</h3>
         <input type="text" name="name" placeholder="Your Name" value="<%=profile_user.name %>" required>
         <input type="email" name="email" placeholder="Your Email" value="<%=profile_user.email %>" required>
-        <input type="file" name="avatar" placeholder="Profile Picture">
+        <input type="file" name="avatar" accept="image/*"  placeholder="Profile Picture">
         <input type="submit" value="Update">
     </form>
 <%} else { %>
+    <img src="<%= (profile_user.avatar) ? profile_user.avatar : '/images/user.png' %>" alt="profilr_avatar" width="100">
     <p><%= profile_user.name%></p>
     <p><%= profile_user.email%></p>
+    <p>Posts <%= posts.length %></p>
 <%}%>
 
 <% if(user.id != profile_user.id) { %>
@@ -22,3 +32,19 @@
 <input type="button" user-id="<%= profile_user.id %>" value="Add Friend" onclick="addFriend(this)">
 <% } %>
 <% } %>
+</div>
+
+
+<div class="post-list">
+    <section id="post-list">
+        <% if(locals.posts != 0) {%>
+            <% for(let post of posts) { %>
+                <%-include('_post',{post}) -%>
+            <%}%>
+        <%} else {%>
+            <p id="posts_status">User has posted nothing yet.</p>
+        <%}%>  
+    </section>
+</div>
+
+</section>

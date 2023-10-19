@@ -1,7 +1,36 @@
-<p id="comment-<%= comment._id%>" >
-<% if(locals.user && locals.user.id == comment.user.id) { %>
-<small ><a class="delete-comment" href="/comment/destroy/<%= comment.id %>">X</a></small>
-<% } %>
-<small><%= comment.user.name%></small> <%= comment.content %>
-<small><a class="like-comment" href="likes/toogle?type=Comment&id=<%=comment._id%>"><span class="comment-like-count"><%= comment.likes.length %></span> Likes</a></small>
-</p>
+<link rel="stylesheet" href="/css/comments.css" />
+<script>
+    function redirectToUser(id){
+        window.location = `/users/profile/${id}`
+    }
+</script>
+<div id="comment-<%= comment._id%>" class="user-comment">
+
+    <div class="comment-user-info" style="cursor: pointer;" onclick="redirectToUser('<%= comment.user._id %>')">
+        <img src="/images/user.png" alt="user" /></a>
+        <p class="comment-user-name">
+            <%= comment.user.name %>
+        </p>
+        </a>
+    </div>
+    
+    <div class="comment-user-content">
+        <p>
+            <%= comment.content %> 
+        </p>
+    </div>
+
+    <div class="comments-actions">
+        <a class="like-comment" href="likes/toogle?type=Comment&id=<%=comment._id%>">
+            <span class="comment-like-count"><%= comment.likes.length %></span>
+            <img src="/images/Like.png" alt="like" /></a>
+        </a>
+        <% if(locals.user && locals.user.id==comment.user.id) { %>
+            <a class="delete-comment" href="/comment/destroy/<%= comment.id %>">
+                <span>Remove</span>
+            </a>
+        <% } %>
+    </div>
+
+
+</div>

@@ -1,0 +1,7 @@
+.error_page {
+  position: relative;
+  top: 30%;
+}
+.error_page h3 {
+  color: aliceblue;
+}

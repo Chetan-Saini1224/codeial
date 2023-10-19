@@ -7,9 +7,9 @@ const usersController = require("../controllers/user_controller");
 
 //restricting is user loged in only then go to /profile
 router.get('/profile/:id',passport.checkAuthentication,usersController.profile);
-router.get('/signup',usersController.signup);
+router.get('/signup',passport.checkLogin,usersController.signup);
 router.post("/signupuser",usersController.signupUser);
-router.get("/signin",usersController.signin);
+router.get("/signin",passport.checkLogin,usersController.signin);
 router.get("/signout",usersController.signout);
 router.post('/update/:id',passport.checkAuthentication,usersController.update);
 

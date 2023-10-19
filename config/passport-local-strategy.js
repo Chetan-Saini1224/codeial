@@ -41,7 +41,7 @@ passport.use(new LocalStrategy({
 //Serializing a user determines which data of the user object should be stored in the session, usually the user id.
 //serailize the user :- if user sign in find the id send it to cokkie and cookie send to browser
 passport.serializeUser(function(user,done){
-      done(null,user.id);
+    done(null,user.id);
 });
 
 
@@ -61,13 +61,15 @@ passport.deserializeUser(function(id,done){
 //check if user is authenticated
 passport.checkAuthentication = function(req,res,next)
 {
-    //if usersigned in , then pass on the next function i.e controller action 
+    //if user signed in , then pass on the next function i.e controller action 
     if(req.isAuthenticated())
     {
         return next();
     }
     return res.redirect('/users/signin');
 }
+
+
 
 //set the user for the views
 passport.setAuthenticatedUser = function(req,res,next) {
@@ -82,13 +84,24 @@ passport.setAuthenticatedUser = function(req,res,next) {
     next();
 }
 
+//we use the serializeUser method to serialize the user's ID and store it
+//in the session. When the user makes subsequent requests, 
+//Passport will use the deserializeUser method to retrieve the user's 
+//information from the session and attach it to the req.user object.
 
 
+passport.checkLogin = function(req,res,next)
+{
+    if(!req.isAuthenticated())
+    {
+        return next();
+    }
+    return res.render('visited',{
+        title: 'visited'
+    });
+}
 
 
 
 
 module.exports = passport;
-
-
-

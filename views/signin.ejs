@@ -1,5 +1,14 @@
-<link rel="stylesheet" href="<%= assetPath(`css/user.css`) %>">
-
+<!-- <link rel="stylesheet" href="<%= assetPath(`css/user.css`) %>"> -->
+<link rel="stylesheet" href="/css/user.css">
+<div class="sigIn-mainContainer">
+<div class="left-signIn">
+    <p>
+        Pay attention. It's all about paying attention. 
+        attention is vitality. It connects you with others. It makes you eager.
+        stay eager.”
+    </p>
+</div>
+<div class="signIn-container">   
 <form method="post" action="/users/create-session">
     <div class="input-field">
         <label>Email</label>
@@ -15,9 +24,12 @@
         <input type="submit" value="Login">
     </div>
 </form>
-<p>
-    <a href="/users/auth/google">Google Sign In/Sign Up</a>
-</p>
-<p>
-    <a href="/users/forgetpassword">Forget Password</a>
-</p>
+<div class="signInActions">
+    <a href="/users/auth/google" id="googleSignIn">
+        <img src="/images/google.png" alt="googleLogo"/>
+        Sign In with Google
+    </a>
+    <a href="/users/forgetpassword">Forget Password?</a>
+</div>
+</div>
+</div>

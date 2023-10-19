@@ -24,7 +24,7 @@ passport.use(new JWTStrategy(opts,function(jwtPayload,done){
         if(user){
             return done(null,user);
         }else{
-            return done(null,user);
+            return done(null,false);
         }
     })
 }))

@@ -3,8 +3,10 @@
   "css/home.css": "css/home-a92c974d16.css",
   "css/layout.css": "css/layout-69da7eb815.css",
   "css/user.css": "css/user-6e3e31f2b6.css",
-  "js/chat_engine.js": "js/chat_engine-d5a181109b.js",
-  "js/home.js": "js/home-0e10fee9a1.js",
-  "js/home_comment.js": "js/home_comment-2c38fdc75e.js",
-  "js/profile.js": "js/profile-a2168e780f.js"
+  "images/Delete_Post.jpg": "images/Delete_Post-45b8caa6d3.jpg",
+  "images/Like.png": "images/Like-cfabe9f6fa.png",
+  "images/Liked.png": "images/Liked-f137c4ccbf.png",
+  "images/Logo.png": "images/Logo-b1c7b005f4.png",
+  "images/google.png": "images/google-b3dc0d0919.png",
+  "images/user.png": "images/user-c8a48c3d35.png"
 }

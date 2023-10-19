@@ -1,12 +1,16 @@
 <header id="header">
-    <h5>CODEIAL</h5>
-    <div>
+    <div id="logo">
+        <a href="/" >
+            <img src="/images/Logo.png" alt="logo" />
+        </a>
+    </div>
+    <div class="accounts">
     <% if(locals.user) { %>
-        <a href="users/profile/<%=locals.user._id %>"><%= user.name %></a>
+        <a href="/users/profile/<%=locals.user._id %>"><%= user.name %></a>
         <a href="/users/signout">Sign Out</a>
     <% } else { %>
-       <a href="/users/signin">Sign In</a>
-       <a href="/users/signup">Sign up</a>    
+       <a href="/users/signin">Log In</a>
+       <a href="/users/signup">Register</a>    
     <%}%>
     </div>    
 </header>

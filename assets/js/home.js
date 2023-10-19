@@ -22,6 +22,7 @@ let createPost = () =>{
                let newPost = newPostDom(data.data.post);
                $("#post-list").prepend(newPost);
                deletePost($('.delete-post-button',newPost)); // this class inside this newPost
+               likePost($('.like-post',newPost));
                flashMessages({success:data.message});
           },
           error: (err) => {
@@ -34,41 +35,40 @@ let createPost = () =>{
 
 //method to creae a post in DOM
 let newPostDom = function(post){
-     return $(`<div id="post-${post._id}">
-     <p>
-       <samll>
-         <a class="delete-post-button" href="/posts/destroy/${ post._id }">X</a>
-       </samll>
-       ${  post.content } : ${ post.user.name }
-       <small><a class="like-post" href="likes/toogle?type=Post&id=${post._id}"><span class="post-like-count">${post.likes.length}</span> Likes</a></small>
-     </p>
-     <div class="post-comments">
+     return $(`<div id="post-${post._id}" class="post">
+  <div class="post-content">
+    <div class="post-user">
+      <a class="delete-post-button" href="/posts/destroy/${post._id}">
+         <img src="/images/Delete_Post.jpg" alt="Delete_Icon"  />
+      </a>
+    <small>${post.user.name}</small> 
+    </div>
+    <div class="post-data">
+      <p>
+          ${post.content}
+      </p>
+    </div>
+      <div class="post-actions">
+          <a class="like-post" href="likes/toogle?type=Post&id=${post._id}"><span class="post-like-count">
+              ${post.likes.length}
+          </span> <img src="/images/Like.png" alt="like" /></a>
+          <input type="button" data-id="${post._id}" onclick="Comment_List(this)" value="Comments" />
+      </div>
+  </div> 
 
-       <form action="/comment/create" method="post">
-         <input
-           type="text"
-           name="content"
-           placeholder="Type Here To Add Comment.."
-           required
-         />
-         <input type="hidden" name="post" value="${post._id}" />
-         <input type="submit" value="Add Comment" />
-       </form>
-
-       <input
-         type="button"
-         data-id="${ post._id }"
-         onclick="Comment_List(this)"
-         value="Comments" />
-
-       <div class="post-comments-list">
-         <ul class="comment show-hide" id="post-comments-${  post._id }">
-
-         </ul>
-       </div>
-     </div>
-     
-     </div>`)
+  <div class="post-comments-list">
+    <ul class="comment show-hide" id="post-comments-${post._id}">
+          <div class="post-comments">
+                  <form class="create-comment-form" action="/comment/create" method="post">
+                    <input type="text" name="content" placeholder="Add Comment.." required />
+                    <input type="hidden" name="post" value="${post._id}" />
+                    <input type="submit" value="Add" />
+                  </form>
+          </div>  
+    </ul>
+  </div>
+</div>
+`)
 }
 
 
@@ -104,7 +104,7 @@ let likePost = (likeLink) =>{
          success: function(data){
             $('.post-like-count',likeLink).each(function(i, obj) {
                  if(data.deleted) obj.innerText = parseInt(obj.innerText) - 1;
-                 else obj.innerText = parseInt(obj.innerText) + 1;
+                 else if(data.deleted == false) obj.innerText = parseInt(obj.innerText) + 1;
              });             
          },
          error:function(err)
@@ -115,9 +115,6 @@ let likePost = (likeLink) =>{
     })
   })
 }
-
-
-
 
 
 

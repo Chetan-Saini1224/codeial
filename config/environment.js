@@ -43,7 +43,7 @@ const development = {
 //after that we can use this key in .....(process.env) 
 const production = {
     name:"production",
-    asset_path: process.env.CODEIAL_ASSET_PATH,
+    asset_path: "./assets",
     session_cookie_key: process.env.CODEIAL_SESSION_COOKIE_KEY,
     db:process.env.CODEIAL_DB,
     smtp:{
@@ -66,6 +66,7 @@ const production = {
         options: {stream: accessLogStream}
     }
 }
+
 
 
 module.exports = eval(process.env.CODEIAL_ENVIRONMENT == undefined ? development : eval(process.env.CODEIAL_ENVIRONMENT)) ;

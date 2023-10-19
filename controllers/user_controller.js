@@ -1,4 +1,5 @@
 const userSchema = require("../models/users")
+const postSchema = require("../models/post")
 const resetPasswordToken = require("../models/reset_password_token")
 const Friendship = require("../models/friendship")
 const fs = require("fs");
@@ -10,11 +11,21 @@ module.exports.profile = async function(req,res)
 {
    let friend = await Friendship.findOne({from_user:req.user.id,to_user:req.params.id});
    let user = await userSchema.findById(req.params.id);
+   let posts = await postSchema.find({user:req.params.id})
+   .sort('-createdAt')
+   .populate('user')
+   .populate({
+     path:'comments',
+     populate:{
+       path:'user'        
+     }
+   });
    if(friend) friend = true;
    return res.render('users',{
       title:"users profile",
       profile_user:user,
-      friend
+      friend,
+      posts
    }); 
 }
 

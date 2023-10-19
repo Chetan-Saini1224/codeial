@@ -20,6 +20,8 @@
   padding-top: 0.1rem;
 }
 #chatbox #chatbox-header p {
+  color: aliceblue;
+  font-weight: 600;
   padding-bottom: 0.2rem;
 }
 #chatbox .self-message {

@@ -4,7 +4,8 @@
   "description": "my all social media web application",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all --parallel sass-watch nodemon-watch",
+    "start": "npm-run-all --parallel sass-watch minify nodemon-watch",
+    "minify": "gulp build",
     "nodemon-watch": "nodemon index.js -e *",
     "sass-watch": "sass --no-source-map --watch assets/scss:assets/css",
     "dev": "npm-run-all --parallel sass-watch nodemon-watch",
@@ -40,6 +41,7 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "node-sass": "^8.0.0",
+    "nodemailer": "^6.9.1",
     "npm-run-all": "^4.1.5",
     "passport": "^0.6.0",
     "passport-google-oauth": "^2.0.0",

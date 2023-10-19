@@ -1,0 +1,68 @@
+.user-comment {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  padding: 0.3rem;
+  margin-top: 0.3rem;
+}
+.user-comment .comment-user-info {
+  display: flex;
+}
+.user-comment .comment-user-info img {
+  width: 10%;
+  height: 10%;
+}
+.user-comment .comment-user-info .comment-user-name {
+  font-size: 0.6rem;
+}
+.user-comment .comment-user-content {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  font-size: 0.6rem;
+}
+.user-comment .comment-user-content p {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  word-break: break-all;
+  white-space: pre-line;
+  text-align-last: left;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+}
+.user-comment .comment-user {
+  display: flex;
+}
+.user-comment .comments-actions {
+  display: flex;
+  padding-top: 0.2rem;
+}
+.user-comment .comments-actions a {
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0;
+}
+.user-comment .comments-actions .like-comment {
+  padding: 0.3rem;
+  font-size: 0.8rem;
+}
+.user-comment .comments-actions .like-comment img {
+  width: 17%;
+}
+.user-comment .comments-actions a.delete-comment {
+  text-align: center;
+  padding: 0.3rem;
+  padding-bottom: 0;
+}
+.user-comment .comments-actions .delete-comment {
+  border-radius: 0.5rem;
+  background-color: rgba(206, 91, 255, 0.995);
+  font-weight: 550;
+  font-size: 0.7rem;
+  color: white;
+  border: 2px solid white;
+  margin-left: 1rem;
+  transition: background-color 5ms ease-in-out, color 5ms ease-in-out, border-color 5ms ease-in-out;
+}
+.user-comment .comments-actions .delete-comment:hover {
+  background-color: white;
+  color: rgba(206, 91, 255, 0.995);
+  border-color: rgba(206, 91, 255, 0.995);
+}

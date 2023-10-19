@@ -68,6 +68,9 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 100,
     },
+    // session data is not being persisted between server restarts. 
+    //This can happen if you are using the default in-memory 
+    //session store that is provided by express-session
     store: MongoStore.create({
       mongoUrl: "mongodb://127.0.0.1:27017/codeial_development",
     }),
@@ -76,14 +79,13 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-
 app.use(passport.setAuthenticatedUser);
 
 
-app.use(flash());
-app.use(customMware.setFlash);
+app.use(flash()); //set the req.flash 
+app.use(customMware.setFlash); //get the value for req.flash and set in res.message to use noty on frontend.
+
+
 
 //use express router(no need to give /index)
 //tell all root request go to routes/index
